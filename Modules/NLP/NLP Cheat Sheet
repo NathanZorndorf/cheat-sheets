@@ -1,0 +1,74 @@
+#------------------------------------------------
+# Natural Language Processing with sklearn & nltk 
+#------------------------------------------------
+
+#--- Stop words
+from nltk.corpus import stopwords # Import the stop word list
+
+
+#---- Count Vectorizer 
+from sklearn.feature_extraction.text import CountVectorizer
+vc = CountVectorizer()
+
+	# Example
+	from sklearn.feature_extraction.text import CountVectorizer
+
+	# First create the vectorizer class
+	vectorizer = CountVectorizer(stop_words='english', max_features=50)
+
+	# Create the vocabulary 
+	vectorizer.fit(data_train.data)
+
+	# create matrices of the bag of words
+	train_matrix_mod_1 = vectorizer.transform(data_train.data).todense()
+	test_matrix_mod_1  = vectorizer.transform(data_test.data).todense()
+
+	# Take a look at the words in the vocabulary
+	vocab = vectorizer.get_feature_names()
+
+	dist = np.sum(vectorizer.transform(data_train.data).toarray(), axis=0)
+
+	for tag, count in zip(vocab, dist):
+	    print tag, count
+
+	# Create dataframes from the matrices
+	df_train_mod_1 = pd.DataFrame(data=train_matrix_mod_1, columns=vectorizer.get_feature_names())
+	df_test_mod_1  = pd.DataFrame(data=test_matrix_mod_1,  columns=vectorizer.get_feature_names())
+
+
+
+	
+
+#---- TF-IDF Vectorizer 
+# TF: Term Frequency, which measures how frequently a term occurs in a document. 
+# Since every document is different in length, it is possible that a term would appear much more times in long documents than shorter ones. 
+# Thus, the term frequency is often divided by the document length (aka. the total number of terms in the document) as a way of normalization:
+# TF(t) = (Number of times term t appears in a document) / (Total number of terms in the document).
+
+# IDF: Inverse Document Frequency, which measures how important a term is. 
+# While computing TF, all terms are considered equally important. 
+# However it is known that certain terms, such as "is", "of", and "that", may appear a lot of times but have little importance. Thus we need to weigh down the frequent terms while scale up the rare ones, by computing the following:
+# IDF(t) = log_e(Total number of documents / Number of documents with term t in it).
+
+from sklearn.feature_extraction.text import TfidfVectorizer
+doc2vec = TfidfVectorizer(ngram_range=, stop_words=, min_df=, max_df=)
+
+
+#--- Print out terms and score
+response = tfidf.transform([example_text])
+print response
+
+feature_names = tfidf.get_feature_names()
+for col in response.nonzero()[1]:
+    print feature_names[col], ' - ', response[0, col]
+
+#----- Topic Models
+from sklearn
+
+
+
+
+
+
+
+

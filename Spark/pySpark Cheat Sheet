@@ -1,0 +1,22 @@
+#------------ SPARK -----------#
+
+from pyspark import SparkConf, SparkContext
+
+# sets cluster of machines to work on, gives you details of the cluster 
+conf = pyspark.SparkConf().setMaster("local").setAppName("Gutenberg")
+
+# # allows you to communicate with the cluster 
+sc = SparkContext(conf=conf)
+
+alice_wonderland = sc.textFile("/Users/Naekid/Desktop/DSI-SF-5-fork/DSI-SF-5/curriculum/week-08/Big_Data/proj_gutenberg_alic.txt")
+ 
+mapper = alice_wonderland.map(lambda x: x.split()) # split into list of lists
+				.flatMap(lambda word: word)  # operate on each element in a list of lists
+				.map(lambda word: (word,1)) # create key-value pairs 
+
+reducer = mapper.reduceByKey(lambda a, b: a + b)
+
+reducer.collect()
+
+
+# Question 1

@@ -1,0 +1,25 @@
+import spacy
+
+#---------------------------
+# Example Workflow
+#---------------------------
+import spacy 
+
+def read_file(file_name):
+    with open(file_name, 'r') as file:
+        return file.read().decode('utf-8')
+
+# Load nlp
+nlp = spacy.load('en')
+# read your corpus 
+text = read_file('/data/price_and_prejudice.txt')
+# 
+processed_text = nlp(text)
+
+
+
+#---------------------------
+# Documentation
+#---------------------------
+# Parts of speech:
+http://www.winwaed.com/blog/2011/11/08/part-of-speech-tags/
