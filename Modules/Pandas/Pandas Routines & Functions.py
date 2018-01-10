@@ -535,6 +535,9 @@ df['hour'] = df['timestamp'].map(lambda x: x.to_pydatetime().hour)
 # This should be done after you've donverte a column from string to datetime  
 df['DateTime'] = df['DateTime'].dt.strftime('%-m/%-d/%Y %-H:%M')
 
+# Delete trailing zeros from dates like '01/01/2017'
+df['DateTime'] = df['DateTime'].dt.strftime('%-m/%-d/%Y') # Mac
+df['DateTime'] = df['DateTime'].dt.strftime('%#m/%#d/%Y') # Windows
 
 #----------------------------------------------------#
 #--------------- MULTIINDEXING ----------------------#
