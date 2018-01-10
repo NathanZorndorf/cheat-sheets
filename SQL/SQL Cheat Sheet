@@ -1,0 +1,91 @@
+SELECT
+
+FROM
+
+WHERE
+
+GROUP BY 
+
+HAVING 
+
+ORDER BY 
+
+LIMIT 
+
+
+#--------------------------#
+#----- OPERATORS ----------#
+#--------------------------#
+
+#--- DISTINCT  : Returns only distinct values in a table . 
+SELECT DISTINCT _column_name_, _column_name_  
+FROM _table_name_;
+
+
+#----------------------------------------#
+#----- MYSQL Terminal Commands ----------#
+#----------------------------------------#
+ 
+#-------- START MYSQL SERVER 
+
+$ mysql.server start
+$ mysql.server stop
+
+$ mysqld_safe --skip-grant-tables
+
+# open new tab in terminal
+
+$ mysql -u root
+
+#---------
+
+UPDATE mysql.user SET authentication_string=PASSWORD('password') WHERE User='root';
+UPDATE mysql.user SET password=PASSWORD('password') WHERE User='root';
+
+FLUSH PRIVILEGES;
+
+open a new tab in terminal
+
+mysql -u root -p
+
+ALTER USER 'root'@'localhost' IDENTIFIED BY 'password'; # never worked for me 
+
+
+open sql pro
+
+name: SQLforNEWBS
+username: root
+password: password
+
+
+#--------------------------#
+#---------- CASE ----------#
+#--------------------------#
+
+# You can use CASE with aggregate functions to count rows that fulfill a certain condition
+# Example: Using Mode Analytics data platform
+SELECT CASE WHEN year = 'FR' THEN 'FR'
+            WHEN year = 'SO' THEN 'SO'
+            WHEN year = 'JR' THEN 'JR'
+            WHEN year = 'SR' THEN 'SR'
+            ELSE 'No Year Data' END AS year_group,
+            COUNT(1) AS count
+  FROM benn.college_football_players
+ GROUP BY 1
+
+# Example: count schools whose names start with A-N, and M-Z
+ SELECT CASE WHEN full_school_name < 'N' THEN 'A-N'
+            WHEN full_school_name >= 'N' THEN 'M-Z' 
+            ELSE NULL 
+            END as school_name_group,
+    COUNT(1) as count_num
+FROM benn.college_football_players 
+GROUP BY 1
+
+
+
+
+
+
+
+

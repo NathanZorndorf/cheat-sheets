@@ -1,0 +1,187 @@
+#------------------ GIT COMMANDS ------------------_#
+
+#---- clone a repository 
+$ git clone url destination_path
+$ git clone path/on/computer destination_path
+
+#---- Initialize a repository 
+$ git init 
+
+#---- Check the hash of a commit
+$ git rev-parse HEAD
+$ git rev-parse HEAD~1 # second newest commit
+
+#---- Check the status of each file in the repository 
+$ git status
+
+
+#---- Branch 
+$ git branch # check which branch we are on
+$ git branch branch_name # create a new branch
+$ git branch -r # shows all branches on the remote
+$ git branch -a # shows the local branches 
+$ git branch -d branch_to_delete # delete (locally) branch once all of the commits in the branch have been merged into another branch 
+
+
+#---- Switch to a branch
+$ git checkout branch_name # switch to a branch 
+$ git checkout -b branch_name  # Create a branch AND switch to it 
+$ git checkout --ours .		# keep files from our conflicting branch (after a merge conflict) 
+$ git checkout --theirs .	# keep files from their conflicting branch (after a merge conflict)
+
+#---- List the remotes 
+$ git remote 
+$ git remote -v
+
+#---- show what changed in a commit
+$ git show commit_hash_# 
+
+#---- Check file differences
+$ git diff hash_1 hash_2 
+$ git diff older_branch newer_branch # see differences between branches 
+$ git diff --staged 
+	#---- quit diff
+	$ q
+
+#---- Add files to the staging area
+$ git add file_name
+
+#---- Delete files in the staging area
+$ git rm file_name 
+$ git rm --cached file_name # remove file from git repository, but not working directory. They won't be tracked anymore. 
+
+
+#---- Ignore files
+1) create a file called .gitingore 
+2) add lines to the file to tell git what files to ignore when adding to staging area 
+Use https://github.com/github/gitignore to find popular files to place into .gitingore for different languages 
+
+
+#---- commit files in the staging area
+$ git commit -m "commit message."
+
+#---- push branch to the remote repository
+$ git push name_of_remote_repo name_of_branch
+	# Example : when you clone a repo, git automatically names the remote repo origin 
+	$ git push origin master
+
+
+#---- check history of a repository 
+$ git log 
+$ git log --stat
+$ git log -p # shows differences between commits 
+
+#---- revert / reset / return to an old commit
+$ git reset --hard commit_hash_#
+
+#---- update current branch with the latest commits
+$ git pull 
+$ git pull -s recursive -X ours 	# pull preferring our changes 
+$ git pull -s recursive -X theirs
+
+#---- fetch the current branches and commits from the remote
+$ git fetch # doesn't change working directory, but just updates list of branch names and commits 
+
+
+#---- Merge changes (to merge branch b into branch a, must switch to branch a, then run git merge. Afterwards you must push branch a to the remote repo)
+$ git merge branch_b_name
+$ git merge --abort # stops the merge (useful when there are conflicts )
+
+	# Example : if you want to merge their branch into our branch using their changes
+	$ git checkout our_branch
+	$ git merge -X theirs their_branch
+
+	# Example : if you want to merge using our changes
+	$ git merge -s recursive -X ours branch_to_merge
+
+
+#---- Merge tools
+$ git mergetool --tool tool_name # run specific mergetool
+$ git mergetool --tool-help # see available merge tools on your system 
+
+$---- Rebase : Bring changes from parent branch into current branch 
+$ git checkout my_branch
+$ git rebase master 		
+
+
+
+#----------- META COMMANDS
+#---- Stores user information 
+$ git config --global -l # lists configuration settings 
+$ git config --global user.email "your.email@domain.com" # set user email
+$ git config --global user.name "Your name"
+
+
+
+#------------- WORKFLOW --------------#
+
+#---- Generate a new SSH KEY
+https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/
+
+
+
+#---- Add a remote repository 
+$ git remote add origin github_url 
+
+#---- Daily GA DSI-5 update 
+$ git pull https://github.com/ga-students/DSI-SF-5.git -s recursive -X ours
+
+
+#---- Merge an upstream repository into your fork
+https://github.com/ga-students/DSI-SF-5.git
+$ git checkout master
+$ git pull https://github.com/ORIGINAL_OWNER/ORIGINAL_REPOSITORY.git BRANCH_NAME
+# if there are conflicts, resolve them.
+$ git commit 
+$ git push origin master 
+
+
+#---- Resolving Merge Errors 
+https://easyengine.io/tutorials/git/git-resolve-merge-conflicts/
+
+
+
+#---- Merging a branch with conflicts 
+1) remove git conflict markup and only keep code that you want to commit.
+2) repeat for each section of conflict markup
+3) add file(s) to staging area 
+4) commit 
+5) push 
+
+
+#---- Duplicate a repository
+https://help.github.com/articles/duplicating-a-repository/
+
+
+#--------------- TIPS --------------#
+
+#---- Naming a branch 
+Use a word that describes the type of change the branch is making, then a slash, then the name of the change.
+Feature -- feature/happy-bot	# add functionality 
+Fix 	-- fix/remove-error		# fix bugs
+Chore 	-- chore/add-analytics 	# reorganize code or make it more efficient 
+
+
+#---- A very common development workflow when using git looks like this:
+1) Create a branch off of master with the name of your feature. Let's say feature/better-algo.
+
+2) Make your changes on the branch, and create commits.
+
+3) Push the branch to the remote repo.
+
+4) Get others to look at and evaluate your branch.
+
+5) Merge the branch into master when everyone thinks it looks okay.
+
+6) Delete the branch.
+
+#----- Upload HW 
+1) clone the HW mirror 
+$ git clone https://github.com/NathanZorndorf/DSI-SF-5-mirror.git
+
+2) copy paste your files into the mirror directory 
+3) commit and push 
+
+
+
+

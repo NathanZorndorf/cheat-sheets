@@ -1,0 +1,24 @@
+#---------- ANACONDA CHEAT SHEET -------------_#
+
+#---- Help
+$ conda env --help
+
+#---- Create an environment
+$ conda create --name env_name
+$ conda create --name env_name python=3 	# specify version of python 
+
+#---- Change environments
+$ source activate env_name
+
+#---- Deactivate environment
+$ source deactivate 
+
+#---- List all environments
+$ conda info --envs
+$ conda env list
+
+#---- Clone an environment
+$ conda create --name flowers --clone snowflakes
+
+#---- Remove an environment
+$ conda remove --name flowers --all
